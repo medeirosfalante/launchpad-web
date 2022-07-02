@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Coinex Smart chain testnet",
+        "key": "csc",
+        "chainName": "Coinex Smart chain testne",
+        "rpcUrls": ["https://testnet-rpc.coinex.net/"],
+        "chainId": "0x35",
+        "icon": "https://www.coinex.net/images/header/coinex-logo.svg",
+        "nativeCurrency": {
+            "name": "CET",
+            "symbol": "CET",
+            "decimals": 18
+        },
+        "blockExplorerUrls": ["https://testnet.coinex.net/"]
+    },
+    {
+        "name": "Binance Smartchain Testnet",
+        "key": "bnb",
+        "chainName": "Binance Smartchain Testnet",
+        "rpcUrls": ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
+        "chainId": "0x61",
+        "icon": "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
+        "nativeCurrency": {
+            "name": "BNB",
+            "symbol": "BNB",
+            "decimals": 18
+        },
+        "blockExplorerUrls": ["https://testnet.bscscan.com//"]
+    }
+]
