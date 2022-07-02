@@ -19,7 +19,7 @@ const withNoSSR = (Component) =>
     dynamic(() => Promise.resolve(Component), { ssr: false });
 
 // demo data
-import productData from "../data/products.json";
+
 
 const TokenDetails = ({ id }) => {
     const { sales, contract, web3Provider, categories } = useSelector(
