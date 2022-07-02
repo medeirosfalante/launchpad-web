@@ -14,9 +14,9 @@ export async function getStaticProps() {
 }
 
 const Explore = () => {
-    const { orders } = useSelector((state) => state.wallet);
+    const { sales } = useSelector((state) => state.wallet);
 
-    const ordersByCategory = orders.map((item) => {
+    const salesByCategory = sales.map((item) => {
         if (item.category === "1") {
             return item;
         }
@@ -36,7 +36,7 @@ const Explore = () => {
                         section_title: {
                             title: "Explore Category",
                         },
-                        products: ordersByCategory,
+                        products: salesByCategory,
                     }}
                 />
             </main>
