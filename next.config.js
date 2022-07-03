@@ -25,7 +25,8 @@ module.exports = {
             "www.coinex.net",
             "i.ibb.co",
             "media.discordapp.net",
-            "icons.iconarchive.com"
+            "icons.iconarchive.com",
+            "gateway.pinata.cloud"
         ],
     },
     pageExtensions: ["mdx", "md", "jsx", "js", "tsx", "ts"],

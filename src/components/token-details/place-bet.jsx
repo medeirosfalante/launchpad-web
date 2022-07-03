@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Image from "next/image";
 import Anchor from "@ui/anchor";
 import Button from "@ui/button";
-import PlaceBidModal from "@components/modals/placebid-modal";
+import PlaceBidModal from "@components/modals/buytoken-modal";
 import Countdown from "@ui/countdown/layout-02";
 import { ImageType } from "@utils/types";
 
@@ -39,7 +39,11 @@ const PlaceBet = ({ product }) => {
                                         </Anchor>
                                     </span>
                                     <span className="count-number">
-                                        por: {product.price} {product.tokenPaymentContractSymbol}
+                                        por: {parseFloat(
+                                            product.price /
+                                                10 **
+                                                    product.tokenPaymentContractDecimals
+                                        )} {product.tokenPaymentContractSymbol}
                                     </span>
                                 </div>
                             </div>
@@ -64,7 +68,7 @@ const PlaceBet = ({ product }) => {
                     Buy
                 </Button>
             </div>
-            <PlaceBidModal show={showBidModal} handleModal={handleBidModal} />
+            <PlaceBidModal show={showBidModal} handleModal={handleBidModal} product={product}/>
         </>
     );
 };

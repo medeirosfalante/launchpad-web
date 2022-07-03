@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import ShareDropdown from "../share-dropdown";
+import ShareDropdown from "../token-share-dropdown";
 
 const ProductTitle = ({ className, title, likeCount }) => (
     <div className={clsx("pd-title-area", className)}>

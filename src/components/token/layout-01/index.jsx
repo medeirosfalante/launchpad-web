@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Image from "next/image";
 import clsx from "clsx";
@@ -10,33 +10,95 @@ import ProductBid from "@components/product-bid";
 import Button from "@ui/button";
 import { ImageType } from "@utils/types";
 import PlaceBidModal from "@components/modals/placebid-modal";
+import { useSelector } from "react-redux";
+import { ethers, Contract, getDefaultProvider, utils } from "ethers";
+import erc20 from "../../../data/erc20.json";
 
 const Product = ({
     overlay,
-    title,
-    id,
-    latestBid,
-    price,
-    likeCount,
-    auction_date,
-    image,
-    bitCount,
-    authors,
     placeBid,
     disableShareDropdown,
-    endTime,
-    creator,
-    totalPercentLiquidPool,
-    totalSell,
-    balance,
-    liked,
+    product,
 }) => {
     const [showBidModal, setShowBidModal] = useState(false);
+
+    const [productRef, setProductRef] = useState({
+        balance: "",
+        category: {
+            name: "",
+            icon: "",
+            id: "",
+            isLive: false,
+        },
+        creator: "",
+        endTime: "",
+        finishVesting: "",
+        finished: false,
+        hasVesting: false,
+        id: "",
+        initiated: false,
+        pair: "",
+        price: "",
+        startTime: "",
+        startVesting: "",
+        tokenContract: "",
+        tokenPaymentContract: "",
+
+        tokenContractDecimals: 0,
+        tokenContractSymbol: "",
+        tokenPaymentContractDecimals: 0,
+        tokenPaymentContractSymbol: "",
+        total: "",
+        totalLocked: "",
+        totalPercentForward: "",
+        totalPercentLiquidPool: "",
+        totalSell: "",
+        urlProperties: "",
+        name: "",
+        title: "",
+        images: [],
+        description: "",
+        content_html: "",
+    });
+
     const handleBidModal = () => {
         setShowBidModal((prev) => !prev);
     };
 
-    console.log(creator);
+    const { sales, contract, web3Provider, categories } = useSelector(
+        (state) => state.wallet
+    );
+
+    useEffect(async () => {
+        if (product != undefined) {
+            const contractPaymentToken = new Contract(
+                product.tokenPaymentContract,
+                erc20,
+                web3Provider
+            );
+
+            const contractToken = new Contract(
+                product.tokenContract,
+                erc20,
+                web3Provider
+            );
+
+            let decimalsPayment = await contractPaymentToken.decimals();
+            let symbolPayment = await contractPaymentToken.symbol();
+
+            let decimals = await contractToken.decimals();
+            let symbol = await contractToken.symbol();
+
+            setProductRef({
+                ...product,
+                tokenContractDecimals: parseInt(decimals),
+                tokenContractSymbol: symbol,
+                tokenPaymentContractDecimals: parseInt(decimalsPayment),
+                tokenPaymentContractSymbol: symbolPayment,
+            });
+        }
+    }, []);
+
     return (
         <>
             <div
@@ -47,27 +109,29 @@ const Product = ({
                 )}
             >
                 <div className="card-thumbnail">
-                    {image && (
-                        <Anchor path={`/token/${id}`}>
+                    {productRef.images.length > 0 && (
+                        <Anchor path={`/token/${product.id}`}>
                             <Image
-                                src={image}
+                                src={productRef.images[0]}
                                 alt={"NFT_portfolio"}
                                 width={533}
                                 height={533}
                             />
                         </Anchor>
                     )}
-                    {endTime && <CountdownTimer date={endTime} />}
+                    {productRef.endTime && (
+                        <CountdownTimer date={productRef.endTime} />
+                    )}
                 </div>
                 <div className="product-share-wrapper">
-                    <Anchor path={`/token/${id}`}>
-                        <span className="product-name">{title}</span>
+                    <Anchor path={`/token/${product.id}`}>
+                        <span className="product-name">{productRef.title}</span>
                     </Anchor>
                     <div className="profile-share">
                         <ClientAvatar
-                            key={creator}
-                            slug={creator}
-                            name={creator}
+                            key={productRef.creator}
+                            slug={productRef.creator}
+                            name={productRef.creator}
                             image={"/images/client/client-2.png"}
                         />
                     </div>
@@ -84,31 +148,35 @@ const Product = ({
                 <br />
                 <span className="latest-bid">
                     Liquidity: <br />
-                    <strong>{totalPercentLiquidPool}%</strong>
+                    <strong>{productRef.totalPercentLiquidPool}%</strong>
                 </span>
                 <br />
                 <span className="latest-bid">
-                    Soft Cap: <br /> <strong>{price} USDT</strong>
+                    Soft Cap: <br /> <strong>{productRef.softCap} USDT</strong>
                 </span>
                 <br />
                 <span className="latest-bid">
                     hard Cap: <br />
-                    <strong>{price} USDT</strong>
+                    <strong>{productRef.hardCap} { productRef.tokenPaymentContractSymbol}</strong>
                 </span>
                 <br />
                 <span className="latest-bid">
                     Total Raised: <br />
-                    <strong>{totalSell}</strong>
+                    <strong>{productRef.totalSell}</strong><br></br> {productRef.tokenContractSymbol}
                 </span>
                 <br />
                 <span className="latest-bid">
-                    availability: <br /> <strong>{balance}</strong>
+                    Availability: <br /> <strong>{productRef.balance}<br></br> {productRef.tokenContractSymbol}</strong>
                 </span>
                 <br />
                 <br />
                 <ProductBid
-                    price={{ amount: price, currency: "USDT" }}
-                    likeCount={liked}
+                    price={{ amount:  parseFloat(
+                        productRef.price /
+                            10 **
+                                productRef.tokenPaymentContractDecimals
+                    ), currency: productRef.tokenPaymentContractSymbol }}
+                    likeCount={productRef.liked}
                 />
             </div>
             <PlaceBidModal show={showBidModal} handleModal={handleBidModal} />

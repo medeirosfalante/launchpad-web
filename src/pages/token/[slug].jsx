@@ -20,8 +20,7 @@ const withNoSSR = (Component) =>
 
 // demo data
 
-
-const TokenDetails = ({ id }) => {
+const TokenDetails = ({ slug }) => {
     const { sales, contract, web3Provider, categories } = useSelector(
         (state) => state.wallet
     );
@@ -46,6 +45,11 @@ const TokenDetails = ({ id }) => {
         startVesting: "",
         tokenContract: "",
         tokenPaymentContract: "",
+
+        tokenContractDecimals: 0,
+        tokenContractSymbol: "",
+        tokenPaymentContractDecimals: 0,
+        tokenPaymentContractSymbol: "",
         total: "",
         totalLocked: "",
         totalPercentForward: "",
@@ -60,9 +64,8 @@ const TokenDetails = ({ id }) => {
     });
 
     useEffect(async () => {
-        if (contract != null) {
-            const sale = await contract.getSale(1);
-
+        if (contract != null && slug != undefined) {
+            const sale = await contract.getSale(slug);
             let category = categories.find(
                 (item) => item.id == sale["category"].toString()
             );
@@ -88,8 +91,18 @@ const TokenDetails = ({ id }) => {
                 erc20,
                 web3Provider
             );
+
+            const contractToken = new Contract(
+                sale.tokenContract,
+                erc20,
+                web3Provider
+            );
+
             let decimalsPayment = await contractPaymentToken.decimals();
-            let symbol = await contractPaymentToken.symbol();
+            let symbolPayment = await contractPaymentToken.symbol();
+
+            let decimals = await contractToken.decimals();
+            let symbol = await contractToken.symbol();
 
             setSales({
                 balance: sale["balance"].toString(),
@@ -106,9 +119,11 @@ const TokenDetails = ({ id }) => {
                 pair: sale["pair"],
                 price: sale["price"].toString(),
                 tokenContract: sale["tokenContract"],
+                tokenContractDecimals: parseInt(decimals),
+                tokenContractSymbol: symbol,
                 tokenPaymentContract: sale["tokenPaymentContract"],
                 tokenPaymentContractDecimals: parseInt(decimalsPayment),
-                tokenPaymentContractSymbol: symbol,
+                tokenPaymentContractSymbol: symbolPayment,
                 total: sale["total"].toString(),
                 totalLocked: sale["totalLocked"].toString(),
                 totalPercentForward: sale["totalPercentForward"].toString(),
@@ -122,9 +137,15 @@ const TokenDetails = ({ id }) => {
                 images: responseJson.images,
                 description: responseJson.description,
                 content_html: responseJson.content_html,
+                highlight: sale["highlight"],
+                liked: parseInt(sale["liked"].toString()),
+                softCap: sale["softCap"].toString(),
+                hardCap: sale["hardCap"].toString(),
+                minPerUser: sale["minPerUser"].toString(),
+                maxPerUser: sale["maxPerUser"].toString(),
             });
         }
-    }, [contract]);
+    }, [contract,slug]);
 
     return (
         <Wrapper>
@@ -139,10 +160,33 @@ const TokenDetails = ({ id }) => {
     );
 };
 
+export async function getStaticPaths() {
+    return {
+        paths: [],
+        fallback: true,
+    };
+}
+
+export async function getStaticProps({ params }) {
+    // const product = productData.find(({ slug }) => slug === params.slug);
+    // const { categories } = product;
+    // const recentViewProducts = shuffleArray(productData).slice(0, 5);
+    // const relatedProducts = productData
+    //     .filter((prod) => prod.categories?.some((r) => categories?.includes(r)))
+    //     .slice(0, 5);
+    return {
+        props: {
+            className: "template-color-1",
+            slug: params.slug,
+            // product,
+            // recentViewProducts,
+            // relatedProducts,
+        }, // will be passed to the page component as props
+    };
+}
+
 TokenDetails.propTypes = {
-    product: PropTypes.shape({}),
-    recentViewProducts: PropTypes.arrayOf(PropTypes.shape({})),
-    relatedProducts: PropTypes.arrayOf(PropTypes.shape({})),
+   
 };
 
 export default withNoSSR(TokenDetails);

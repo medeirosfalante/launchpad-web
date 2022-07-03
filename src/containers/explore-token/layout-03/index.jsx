@@ -119,18 +119,8 @@ const ExploreProductArea = ({ className, space, data }) => {
                                 >
                                     <Product
                                         // placeBid={!!data.placeBid}
-                                        title={prod.title}
-                                        id={prod.id.toString()}
                                         // latestBid={prod.latestBid}
-                                        price={prod.price}
-                                        // likeCount={prod.likeCount}
-                                        image={prod.images?.[0]}
-                                        endTime={prod.endTime}
-                                        creator={prod.creator}
-                                        totalPercentLiquidPool={prod.totalPercentLiquidPool}
-                                        totalSell={prod.totalSell}
-                                        balance={prod.balance}
-                                        liked={prod.liked}
+                                        product={prod}
                                         // bitCount={prod.bitCount}
 
                                     />

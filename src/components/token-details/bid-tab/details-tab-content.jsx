@@ -2,43 +2,60 @@ import PropTypes from "prop-types";
 import TopSeller from "@components/top-seller/layout-01";
 import { IDType, ImageType } from "@utils/types";
 
-const DetailsTabContent = ({ owner, properties, tags }) => (
-    <div className="rn-pd-bd-wrapper mt--20">
-        <TopSeller
-            name={owner.name}
-            total_sale={owner.total_sale}
-            slug={owner.slug}
-            image={owner.image}
-        />
+const DetailsTabContent = ({ owner, properties, tags, product }) => (
+    <div className="mt--20">
         {properties && (
             <div className="rn-pd-sm-property-wrapper">
-                <h6 className="pd-property-title">Property</h6>
+                <h6 className="pd-property-title">Configurations</h6>
                 <div className="property-wrapper">
-                    {properties.map((property) => (
-                        <div key={property.id} className="pd-property-inner">
-                            <span className="color-body type">
-                                {property.type}
-                            </span>
-                            <span className="color-white value">
-                                {property.value}
-                            </span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        )}
-        {tags && (
-            <div className="rn-pd-sm-property-wrapper">
-                <h6 className="pd-property-title">Tags</h6>
-                <div className="catagory-wrapper">
-                    {tags.map((tag) => (
-                        <div key={tag.id} className="pd-property-inner">
-                            <span className="color-body type">{tag.type}</span>
-                            <span className="color-white value">
-                                {tag.value}
-                            </span>
-                        </div>
-                    ))}
+                    <div key={0} className="pd-property-inner">
+                        <span className="color-body type">Launch Type:</span>
+                        <span className="color-white value">
+                          IDO
+                        </span>
+                    </div>
+                    <div key={1} className="pd-property-inner">
+                        <span className="color-body type">Soft Cap:</span>
+                        <span className="color-white value">
+                          {product.softCap} <br></br> {product.tokenPaymentContractSymbol}
+                        </span>
+                    </div>
+                    <div key={2} className="pd-property-inner">
+                        <span className="color-body type">hard Cap:</span>
+                        <span className="color-white value">
+                          {product.hardCap}<br></br> {product.tokenPaymentContractSymbol}
+                        </span>
+                    </div>
+                    <div key={3} className="pd-property-inner">
+                        <span className="color-body type">Liquidity:</span>
+                        <span className="color-white value">
+                          {product.totalPercentLiquidPool}%
+                        </span>
+                    </div>
+                    <div key={4} className="pd-property-inner">
+                        <span className="color-body type">Total Raised:</span>
+                        <span className="color-white value">
+                          {product.totalSell}<br></br>  {product.tokenPaymentContractSymbol}
+                        </span>
+                    </div>
+                    <div key={5} className="pd-property-inner">
+                        <span className="color-body type">Availability:</span>
+                        <span className="color-white value">
+                          {product.balance}<br></br> {product.tokenContractSymbol}
+                        </span>
+                    </div>
+                    <div key={5} className="pd-property-inner">
+                        <span className="color-body type">Min per user:</span>
+                        <span className="color-white value">
+                          {product.minPerUser} <br></br> {product.tokenPaymentContractSymbol}
+                        </span>
+                    </div>
+                    <div key={5} className="pd-property-inner">
+                        <span className="color-body type">Max per user:</span>
+                        <span className="color-white value">
+                          {product.maxPerUser} <br></br> {product.tokenPaymentContractSymbol}
+                        </span>
+                    </div>
                 </div>
             </div>
         )}

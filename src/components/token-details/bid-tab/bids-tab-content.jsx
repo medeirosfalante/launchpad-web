@@ -4,16 +4,14 @@ import { IDType, ImageType } from "@utils/types";
 
 const BidsTabContent = ({ bids }) => (
     <div>
-        {bids?.map((bid) => (
-            <TopSeller
-                key={bid.id}
-                name={bid.user.name}
-                eth={bid.amount}
-                path={bid.user.slug}
-                time={bid.bidAt}
-                image={{ src: bid.user.image.src, width: 44, height: 44 }}
+        <TopSeller
+                key={1}
+                name={"teste"}
+                eth={0}
+                path={"/"}
+                time={1}
+                image={{ src: "/images/client/client-3.png", width: 44, height: 44 }}
             />
-        ))}
     </div>
 );
 

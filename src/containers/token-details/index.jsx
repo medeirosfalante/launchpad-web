@@ -6,23 +6,26 @@ import GalleryTab from "@components/token-details/gallery-tab";
 import ProductTitle from "@components/token-details/title";
 import ProductCategory from "@components/token-details/category";
 import ProductCollection from "@components/token-details/collection";
-import BidTab from "@components/token-details/bid-tab";
+
 import PlaceBet from "@components/token-details/place-bet";
-import { ImageType } from "@utils/types";
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { utils } from "ethers";
-import tokens from "../../data/tokens.json";
+import ReactHtmlParser from "react-html-parser";
 import productsRef from "../../data/products-02.json"
+import BidTab from "@components/token-details/bid-tab";
 
 // Demo Image
 
 const ProductDetailsArea = ({ space, className, product }) => {
     const getTokenPrice = (product) => {
+        if (product.id == ""){
+            return (
+                <>
+                    
+                </>
+            );
+        }
         return (
             <>
-                {product?.price}{" "}
-                {product.tokenPaymentContractSymbol}
+                {product.price/10**product.tokenPaymentContractDecimals} {product.tokenPaymentContractSymbol}
             </>
         );
     };
@@ -40,12 +43,9 @@ const ProductDetailsArea = ({ space, className, product }) => {
                     <div className="col-lg-7 col-md-12 col-sm-12">
                         <Sticky>
                             <GalleryTab
-                                images={product.images.map(item => (
-                                    {
-                                        src:
-                                        item,
-                                    }
-                                ))}
+                                images={product.images.map((item) => ({
+                                    src: item,
+                                }))}
                             />
                         </Sticky>
                     </div>
@@ -53,13 +53,13 @@ const ProductDetailsArea = ({ space, className, product }) => {
                         <div className="rn-pd-content-area">
                             <ProductTitle title={product.name} likeCount={""} />
                             <span className="bid">
-                               Preço do token{" "}
+                                Preço do token{" "}
                                 <span className="price">
                                     {product && getTokenPrice(product)}
                                 </span>
                             </span>
                             <h6 className="title-name">
-                           {product.description}
+                                {product.description}
                             </h6>
                             <div className="catagory-collection">
                                 {product && (
@@ -67,7 +67,8 @@ const ProductDetailsArea = ({ space, className, product }) => {
                                         owner={{
                                             name: product.category.name,
                                             image: {
-                                                src: "/images/client/client-1.png",
+                                                src:
+                                                    "/images/client/client-1.png",
                                             },
                                         }}
                                     />
@@ -79,7 +80,8 @@ const ProductDetailsArea = ({ space, className, product }) => {
                                             name: product.category.name,
                                             slug: "/collection",
                                             image: {
-                                                src: "/images/client/client-2.png",
+                                                src:
+                                                    "/images/client/client-2.png",
                                             },
                                             total_sale: "2500,000",
                                         }}
@@ -87,23 +89,23 @@ const ProductDetailsArea = ({ space, className, product }) => {
                                 )}
                             </div>
                             <Button color="primary-alta" path="#">
-                               More details
+                                More details
                             </Button>
                             <div className="rn-bid-details">
-                                {/* <BidTab
+                                <BidTab
                                     bids={productsRef[0]?.bids}
                                     owner={productsRef[0].owner}
                                     properties={productsRef[0]?.properties}
                                     tags={productsRef[0]?.tags}
                                     history={productsRef[0]?.history}
-                                /> */}
-                                <PlaceBet
-                                   product={product}
+                                    product={product}
                                 />
+                                <PlaceBet product={product} />
                             </div>
                         </div>
                     </div>
                 </div>
+                <div>{ReactHtmlParser(product.content_html)}</div>
             </div>
         </div>
     );
@@ -112,11 +114,7 @@ const ProductDetailsArea = ({ space, className, product }) => {
 ProductDetailsArea.propTypes = {
     space: PropTypes.oneOf([1, 2]),
     className: PropTypes.string,
-    product: PropTypes.shape({
-
-     
-
-    }),
+    product: PropTypes.shape({}),
 };
 
 ProductDetailsArea.defaultProps = {

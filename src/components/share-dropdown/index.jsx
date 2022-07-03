@@ -40,13 +40,6 @@ const ShareDropdown = () => {
                     >
                         Share
                     </button>
-                    <button
-                        type="button"
-                        className="btn-setting-text report-text"
-                        onClick={handleReportModal}
-                    >
-                        Report
-                    </button>
                 </Dropdown.Menu>
             </Dropdown>
             <ShareModal show={showShareModal} handleModal={handleShareModal} />

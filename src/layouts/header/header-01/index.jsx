@@ -96,6 +96,7 @@ const Header = ({ className }) => {
             }));
 
             const salesBlock = await contract.listOpenSales();
+            console.log(salesBlock)
             let sales = await getTokenItem(salesBlock, categories);
 
             setCategory(categories);
@@ -119,7 +120,7 @@ const Header = ({ className }) => {
     const getTokenItem = async (itens, categories) => {
         let Promises = [];
         itens.forEach(async (sale) => {
-            try {
+            console.log(sale)
                 Promises.push(
                     new Promise((resolve, reject) => {
                         fetch(sale["urlProperties"])
@@ -167,7 +168,7 @@ const Header = ({ className }) => {
                                     balance: sale["balance"].toString(),
                                     finished: sale["finished"],
                                     hasVesting: sale["hasVesting"],
-                                    id: sale["id"].toString(),
+                                    id: sale["id"],
                                     initiated: sale["initiated"],
                                     pair: sale["pair"],
                                     price: sale["price"].toString(),
@@ -189,11 +190,17 @@ const Header = ({ className }) => {
                                     images: responseJson.images,
                                     description: responseJson.description,
                                     content_html: responseJson.content_html,
+                                    highlight: sale["highlight"],
+                                    liked: parseInt(sale["liked"].toString()),
+                                    softCap: sale["softCap"].toString(),
+                                    hardCap: sale["hardCap"].toString(),
+                                    minPerUser: sale["minPerUser"].toString(),
+                                    maxPerUser: sale["maxPerUser"].toString(),
                                 });
                             });
                     })
                 );
-            } catch (e) {}
+
         });
         return Promise.all(Promises);
     };
