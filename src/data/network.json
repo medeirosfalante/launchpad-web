@@ -11,7 +11,7 @@
             "symbol": "CET",
             "decimals": 18
         },
-        "blockExplorerUrls": ["https://testnet.coinex.net/"]
+        "blockExplorerUrls": ["https://testnet.coinex.net"]
     },
     {
         "name": "Binance Smartchain Testnet",
@@ -25,6 +25,6 @@
             "symbol": "BNB",
             "decimals": 18
         },
-        "blockExplorerUrls": ["https://testnet.bscscan.com//"]
+        "blockExplorerUrls": ["https://testnet.bscscan.com"]
     }
 ]

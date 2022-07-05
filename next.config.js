@@ -26,7 +26,8 @@ module.exports = {
             "i.ibb.co",
             "media.discordapp.net",
             "icons.iconarchive.com",
-            "gateway.pinata.cloud"
+            "gateway.pinata.cloud",
+            "goeycoin.com"
         ],
     },
     pageExtensions: ["mdx", "md", "jsx", "js", "tsx", "ts"],
