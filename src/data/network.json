@@ -1,19 +1,5 @@
 [
     {
-        "name": "Coinex Smart chain testnet",
-        "key": "csc",
-        "chainName": "Coinex Smart chain testne",
-        "rpcUrls": ["https://testnet-rpc.coinex.net/"],
-        "chainId": "0x35",
-        "icon": "https://www.coinex.net/images/header/coinex-logo.svg",
-        "nativeCurrency": {
-            "name": "CET",
-            "symbol": "CET",
-            "decimals": 18
-        },
-        "blockExplorerUrls": ["https://testnet.coinex.net"]
-    },
-    {
         "name": "Binance Smartchain Testnet",
         "key": "bnb",
         "chainName": "Binance Smartchain Testnet",
