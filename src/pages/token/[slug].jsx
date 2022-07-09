@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 import React, { useCallback, useEffect, useState } from "react";
 import { ethers, Contract, getDefaultProvider, utils } from "ethers";
-import erc20 from "../../data/erc20.json";
+import erc20 from "../../data/interfaces/erc20.json";
 
 import moment from "moment";
 
@@ -21,9 +21,14 @@ const withNoSSR = (Component) =>
 // demo data
 
 const TokenDetails = ({ slug }) => {
-    const { sales, contract, web3Provider, categories } = useSelector(
-        (state) => state.wallet
-    );
+    const {
+        sales,
+        contractPresales,
+        contractOrder,
+        web3Provider,
+        categories,
+        network,
+    } = useSelector((state) => state.wallet);
     const [sale, setSales] = useState({
         balance: "",
         category: {
@@ -63,9 +68,11 @@ const TokenDetails = ({ slug }) => {
         content_html: "",
     });
 
+    const [history, setHistory] = useState([]);
+
     useEffect(async () => {
-        if (contract != null && slug != undefined) {
-            const sale = await contract.getSale(slug);
+        if (contractPresales != null && slug != undefined) {
+            const sale = await contractPresales.getSale(slug);
             let category = categories.find(
                 (item) => item.id == sale["category"].toString()
             );
@@ -103,6 +110,29 @@ const TokenDetails = ({ slug }) => {
 
             let decimals = await contractToken.decimals();
             let symbol = await contractToken.symbol();
+
+            const historyBlock = await contractOrder.listBySaleID(slug);
+
+            const history = historyBlock.map((item) => ({
+                tokenContract: item["tokenContract"],
+                tokenPaymentContract: item["tokenPaymentContract"],
+                price:
+                    parseInt(item["price"].toString()) /
+                    10 ** parseInt(decimalsPayment),
+                amountInToken: parseInt(item["amountInToken"].toString()),
+                buyer:   item["buyer"],
+                path: `${network.blockExplorerUrls[0]}/address/${item["buyer"]}`   ,
+                buyAt:
+                    "     " +
+                    moment(parseInt(item["buyAt"].toString()) * 1000).format(
+                        "YYYY-MM-DD HH:MM:SS"
+                    ),
+                id: item["id"].toString(),
+                tokenContractSymbol: symbol,
+                tokenPaymentContractSymbol: symbolPayment,
+            }));
+
+            setHistory(history);
 
             setSales({
                 balance: sale["balance"].toString(),
@@ -145,7 +175,7 @@ const TokenDetails = ({ slug }) => {
                 maxPerUser: sale["maxPerUser"].toString(),
             });
         }
-    }, [contract,slug]);
+    }, [contractPresales, contractOrder, slug]);
 
     return (
         <Wrapper>
@@ -153,7 +183,7 @@ const TokenDetails = ({ slug }) => {
             <Header />
             <main id="main-content">
                 <Breadcrumb pageTitle={sale.title} currentPage={sale.title} />
-                <TokenDetailsArea product={sale} />
+                <TokenDetailsArea product={sale} history={history} />
             </main>
             <Footer />
         </Wrapper>
@@ -185,8 +215,6 @@ export async function getStaticProps({ params }) {
     };
 }
 
-TokenDetails.propTypes = {
-   
-};
+TokenDetails.propTypes = {};
 
 export default withNoSSR(TokenDetails);

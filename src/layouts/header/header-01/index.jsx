@@ -23,11 +23,15 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { ethers, Contract, getDefaultProvider, utils } from "ethers";
 
-import erc20 from "../../../data/erc20.json";
+import erc20 from "../../../data/interfaces/erc20.json";
 import networkRefs from "../../../data/network.json";
 import tokens from "../../../data/tokens.json";
-import IPreSale from "../../../data/IPreSale.json";
-import presale from "../../../data/presale.json";
+import IPreSale from "../../../data/interfaces/IPreSale.json";
+import IOrderContract from "../../../data/interfaces/IOrderContract.json";
+import ICategoryContract from "../../../data/interfaces/ICategoryContract.json";
+import contractPresaleFile from "../../../data/contracts/presale.json";
+import contractCategoryFile from "../../../data/contracts/category.json";
+import contractOrderFile from "../../../data/contracts/order.json";
 
 import moment from "moment";
 
@@ -79,13 +83,26 @@ const Header = ({ className }) => {
                 let url = seletecItem.rpcUrls[0];
                 web3Provider = new ethers.providers.JsonRpcProvider(url);
             }
-            const contract = new ethers.Contract(
-                presale.address[seletecItem.chainId],
+
+            const contractPresales = new ethers.Contract(
+                contractPresaleFile.address[seletecItem.chainId],
                 IPreSale.abi,
                 web3Provider
             );
 
-            const categoriesBlock = await contract.listCategory();
+             const contractCategory = new ethers.Contract(
+                contractCategoryFile.address[seletecItem.chainId],
+                ICategoryContract.abi,
+                web3Provider
+            );
+
+            const contractOrder = new ethers.Contract(
+                contractOrderFile.address[seletecItem.chainId],
+                IOrderContract.abi,
+                web3Provider
+            );
+
+            const categoriesBlock = await contractCategory.list();
 
             const categories = categoriesBlock.map((item) => ({
                 name: item["name"],
@@ -95,8 +112,7 @@ const Header = ({ className }) => {
                 isLive: false,
             }));
 
-            const salesBlock = await contract.listOpenSales();
-            console.log(salesBlock)
+            const salesBlock = await contractPresales.listOpenSales();
             let sales = await getTokenItem(salesBlock, categories);
 
             setCategory(categories);
@@ -107,7 +123,9 @@ const Header = ({ className }) => {
                     web3Provider,
                     address,
                     network: seletecItem,
-                    contract,
+                    contractCategory,
+                    contractPresales,
+                    contractOrder,
                     sales,
                     categories,
                 })
@@ -120,7 +138,6 @@ const Header = ({ className }) => {
     const getTokenItem = async (itens, categories) => {
         let Promises = [];
         itens.forEach(async (sale) => {
-            console.log(sale)
                 Promises.push(
                     new Promise((resolve, reject) => {
                         fetch(sale["urlProperties"])

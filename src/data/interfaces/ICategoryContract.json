@@ -1,0 +1,724 @@
+{
+  "contractName": "ICategoryContract",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "list",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "icon",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct ICategoryContract.Category[]",
+          "name": "categories",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "icon",
+          "type": "string"
+        }
+      ],
+      "name": "create",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.14+commit.80d49f37\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"icon\",\"type\":\"string\"}],\"name\":\"create\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"list\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"icon\",\"type\":\"string\"}],\"internalType\":\"struct ICategoryContract.Category[]\",\"name\":\"categories\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/ICategoryContract.sol\":\"ICategoryContract\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":2000},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/ICategoryContract.sol\":{\"keccak256\":\"0xe7709a0ecb38f6c79625b7abbacf622b48bbf88c1ef930975cb71608402982a3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4d78999c8e56147c8f0c5448f7972738c257999af1b92c40802caa2da7d076b1\",\"dweb:/ipfs/QmWjhADgoeXXmRw2YhEbJNo4idtrY98CfEaSdgNyKsrSGD\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "//SPDX-License-Identifier: MIT\npragma solidity ^0.8.13;\n\ninterface ICategoryContract {\n    struct Category {\n        uint256 id;\n        string name;\n        string icon;\n    }\n\n    function list()\n        external\n        view\n        returns (Category[] memory categories);\n\n    function create(string memory name, string memory icon)\n        external\n        returns (uint256);\n}\n",
+  "sourcePath": "/Users/medeiros/go/src/github.com/enablersdao/launchpad-contracts/contracts/interfaces/ICategoryContract.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/interfaces/ICategoryContract.sol",
+    "exportedSymbols": {
+      "ICategoryContract": [
+        5011
+      ]
+    },
+    "id": 5012,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4987,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "31:24:23"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "ICategoryContract",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 5011,
+        "linearizedBaseContracts": [
+          5011
+        ],
+        "name": "ICategoryContract",
+        "nameLocation": "67:17:23",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "ICategoryContract.Category",
+            "id": 4994,
+            "members": [
+              {
+                "constant": false,
+                "id": 4989,
+                "mutability": "mutable",
+                "name": "id",
+                "nameLocation": "125:2:23",
+                "nodeType": "VariableDeclaration",
+                "scope": 4994,
+                "src": "117:10:23",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 4988,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "117:7:23",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 4991,
+                "mutability": "mutable",
+                "name": "name",
+                "nameLocation": "144:4:23",
+                "nodeType": "VariableDeclaration",
+                "scope": 4994,
+                "src": "137:11:23",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 4990,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "137:6:23",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 4993,
+                "mutability": "mutable",
+                "name": "icon",
+                "nameLocation": "165:4:23",
+                "nodeType": "VariableDeclaration",
+                "scope": 4994,
+                "src": "158:11:23",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 4992,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "158:6:23",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Category",
+            "nameLocation": "98:8:23",
+            "nodeType": "StructDefinition",
+            "scope": 5011,
+            "src": "91:85:23",
+            "visibility": "public"
+          },
+          {
+            "functionSelector": "0f560cd7",
+            "id": 5001,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "list",
+            "nameLocation": "191:4:23",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4995,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "195:2:23"
+            },
+            "returnParameters": {
+              "id": 5000,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4999,
+                  "mutability": "mutable",
+                  "name": "categories",
+                  "nameLocation": "263:10:23",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5001,
+                  "src": "245:28:23",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_Category_$4994_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct ICategoryContract.Category[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 4997,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 4996,
+                        "name": "Category",
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 4994,
+                        "src": "245:8:23"
+                      },
+                      "referencedDeclaration": 4994,
+                      "src": "245:8:23",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Category_$4994_storage_ptr",
+                        "typeString": "struct ICategoryContract.Category"
+                      }
+                    },
+                    "id": 4998,
+                    "nodeType": "ArrayTypeName",
+                    "src": "245:10:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_Category_$4994_storage_$dyn_storage_ptr",
+                      "typeString": "struct ICategoryContract.Category[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "244:30:23"
+            },
+            "scope": 5011,
+            "src": "182:93:23",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "198e2b8a",
+            "id": 5010,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "create",
+            "nameLocation": "290:6:23",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5006,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5003,
+                  "mutability": "mutable",
+                  "name": "name",
+                  "nameLocation": "311:4:23",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5010,
+                  "src": "297:18:23",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5002,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "297:6:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5005,
+                  "mutability": "mutable",
+                  "name": "icon",
+                  "nameLocation": "331:4:23",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5010,
+                  "src": "317:18:23",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5004,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "317:6:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "296:40:23"
+            },
+            "returnParameters": {
+              "id": 5009,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5008,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5010,
+                  "src": "371:7:23",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5007,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "371:7:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "370:9:23"
+            },
+            "scope": 5011,
+            "src": "281:99:23",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5012,
+        "src": "57:325:23",
+        "usedErrors": []
+      }
+    ],
+    "src": "31:352:23"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/interfaces/ICategoryContract.sol",
+    "exportedSymbols": {
+      "ICategoryContract": [
+        5011
+      ]
+    },
+    "id": 5012,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4987,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "31:24:23"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "ICategoryContract",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 5011,
+        "linearizedBaseContracts": [
+          5011
+        ],
+        "name": "ICategoryContract",
+        "nameLocation": "67:17:23",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "ICategoryContract.Category",
+            "id": 4994,
+            "members": [
+              {
+                "constant": false,
+                "id": 4989,
+                "mutability": "mutable",
+                "name": "id",
+                "nameLocation": "125:2:23",
+                "nodeType": "VariableDeclaration",
+                "scope": 4994,
+                "src": "117:10:23",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 4988,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "117:7:23",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 4991,
+                "mutability": "mutable",
+                "name": "name",
+                "nameLocation": "144:4:23",
+                "nodeType": "VariableDeclaration",
+                "scope": 4994,
+                "src": "137:11:23",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 4990,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "137:6:23",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 4993,
+                "mutability": "mutable",
+                "name": "icon",
+                "nameLocation": "165:4:23",
+                "nodeType": "VariableDeclaration",
+                "scope": 4994,
+                "src": "158:11:23",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 4992,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "158:6:23",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Category",
+            "nameLocation": "98:8:23",
+            "nodeType": "StructDefinition",
+            "scope": 5011,
+            "src": "91:85:23",
+            "visibility": "public"
+          },
+          {
+            "functionSelector": "0f560cd7",
+            "id": 5001,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "list",
+            "nameLocation": "191:4:23",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4995,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "195:2:23"
+            },
+            "returnParameters": {
+              "id": 5000,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4999,
+                  "mutability": "mutable",
+                  "name": "categories",
+                  "nameLocation": "263:10:23",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5001,
+                  "src": "245:28:23",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_Category_$4994_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct ICategoryContract.Category[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 4997,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 4996,
+                        "name": "Category",
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 4994,
+                        "src": "245:8:23"
+                      },
+                      "referencedDeclaration": 4994,
+                      "src": "245:8:23",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Category_$4994_storage_ptr",
+                        "typeString": "struct ICategoryContract.Category"
+                      }
+                    },
+                    "id": 4998,
+                    "nodeType": "ArrayTypeName",
+                    "src": "245:10:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_Category_$4994_storage_$dyn_storage_ptr",
+                      "typeString": "struct ICategoryContract.Category[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "244:30:23"
+            },
+            "scope": 5011,
+            "src": "182:93:23",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "198e2b8a",
+            "id": 5010,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "create",
+            "nameLocation": "290:6:23",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5006,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5003,
+                  "mutability": "mutable",
+                  "name": "name",
+                  "nameLocation": "311:4:23",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5010,
+                  "src": "297:18:23",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5002,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "297:6:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5005,
+                  "mutability": "mutable",
+                  "name": "icon",
+                  "nameLocation": "331:4:23",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5010,
+                  "src": "317:18:23",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5004,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "317:6:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "296:40:23"
+            },
+            "returnParameters": {
+              "id": 5009,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5008,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5010,
+                  "src": "371:7:23",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5007,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "371:7:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "370:9:23"
+            },
+            "scope": 5011,
+            "src": "281:99:23",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5012,
+        "src": "57:325:23",
+        "usedErrors": []
+      }
+    ],
+    "src": "31:352:23"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.14+commit.80d49f37.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2022-07-07T03:07:37.088Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

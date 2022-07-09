@@ -14,7 +14,7 @@ import BidTab from "@components/token-details/bid-tab";
 
 // Demo Image
 
-const ProductDetailsArea = ({ space, className, product }) => {
+const ProductDetailsArea = ({ space, className, product,history }) => {
     const getTokenPrice = (product) => {
         if (product.id == ""){
             return (
@@ -97,7 +97,7 @@ const ProductDetailsArea = ({ space, className, product }) => {
                                     owner={productsRef[0].owner}
                                     properties={productsRef[0]?.properties}
                                     tags={productsRef[0]?.tags}
-                                    history={productsRef[0]?.history}
+                                    history={history}
                                     product={product}
                                 />
                                 <PlaceBet product={product} />

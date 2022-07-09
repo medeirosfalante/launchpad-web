@@ -12,7 +12,7 @@ import { ImageType } from "@utils/types";
 import PlaceBidModal from "@components/modals/placebid-modal";
 import { useSelector } from "react-redux";
 import { ethers, Contract, getDefaultProvider, utils } from "ethers";
-import erc20 from "../../../data/erc20.json";
+import erc20 from "../../../data/interfaces/erc20.json";
 
 const Product = ({
     overlay,

@@ -24,7 +24,7 @@ const TopSeller = ({ name, time, path, image, eth, isVarified }) => (
                     {eth && <>{eth} by</>}
                     <Anchor path={path}>{name}</Anchor>
                 </span>
-                {time && <span className="count-number">{time}</span>}
+                {`  `}{time && <span className="count-number">{time}</span>}
             </div>
         </div>
     </div>

@@ -17,7 +17,9 @@ const INITIAL_STATE = {
     address: null,
     network: null,
     assets: [],
-    contract: null,
+    contractPresales: null,
+    contractCategory: null,
+    contractOrder: null,
     sales: [],
     networks: networkRefs,
     networkRef: networkRefs[0],
@@ -33,7 +35,9 @@ export default function reducer(state = INITIAL_STATE, action) {
                 draft.web3Provider = action.payload.web3Provider;
                 draft.address = action.payload.address;
                 draft.network = action.payload.network;
-                draft.contract = action.payload.contract;
+                draft.contractPresales = action.payload.contractPresales;
+                draft.contractCategory = action.payload.contractCategory;
+                draft.contractOrder = action.payload.contractOrder;
                 draft.networks = networkRefs;
                 draft.assets = [];
                 draft.sales = action.payload.sales;

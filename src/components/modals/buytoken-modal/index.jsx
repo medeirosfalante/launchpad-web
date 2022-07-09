@@ -4,9 +4,9 @@ import Button from "@ui/button";
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { ethers, Contract, getDefaultProvider, utils, Wallet } from "ethers";
-import erc20 from "../../../data/erc20.json";
-import presale from "../../../data/presale.json";
-import IPreSale from "../../../data/IPreSale.json";
+import erc20 from "../../../data/interfaces/erc20.json";
+import presale from "../../../data/contracts/presale.json";
+import IPreSale from "../../../data/interfaces/IPreSale.json";
 
 import { toast } from "react-toastify";
 
