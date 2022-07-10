@@ -129,7 +129,7 @@ const PlaceBidModal = ({ show, handleModal, product }) => {
                 <p>You are about to purchase This Product in EnablersDAO</p>
                 {step == 1 && (
                     <div className="placebid-form-box">
-                        <h5 className="title">Your purchase processed</h5>
+                        <h5 className="title">Your purchase</h5>
                         <div className="bid-content">
                             <div className="bid-content-top"></div>
 

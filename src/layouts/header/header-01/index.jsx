@@ -68,71 +68,89 @@ const Header = ({ className }) => {
         networks,
     } = useSelector((state) => state.wallet);
 
+
+    const defineStorages = async(seletecItem) => {
+
+    }
+
     const authenticate = useCallback(async () => {
-        try {
+        let provider = null;
+        let seletecItem = null;
+        let address = "";
+        try{
             provider = await web3Modal.connect();
-            let web3Provider = new ethers.providers.Web3Provider(provider);
-            const signer = web3Provider.getSigner();
-            const address = await signer.getAddress();
-            const network = await web3Provider.getNetwork();
-            let seletecItem = networkRefs.find(
-                (item) => item.chainId == `0x${network.chainId.toString(16)}`
-            );
-            if (seletecItem == undefined) {
-                seletecItem = networkRefs[0];
-                let url = seletecItem.rpcUrls[0];
-                web3Provider = new ethers.providers.JsonRpcProvider(url);
-            }
-
-            const contractPresales = new ethers.Contract(
-                contractPresaleFile.address[seletecItem.chainId],
-                IPreSale.abi,
-                web3Provider
-            );
-
-             const contractCategory = new ethers.Contract(
-                contractCategoryFile.address[seletecItem.chainId],
-                ICategoryContract.abi,
-                web3Provider
-            );
-
-            const contractOrder = new ethers.Contract(
-                contractOrderFile.address[seletecItem.chainId],
-                IOrderContract.abi,
-                web3Provider
-            );
-
-            const categoriesBlock = await contractCategory.list();
-
-            const categories = categoriesBlock.map((item) => ({
-                name: item["name"],
-                icon: item["icon"],
-                id: item["id"].toString(),
-                icon: "feather-home",
-                isLive: false,
-            }));
-
-            const salesBlock = await contractPresales.listOpenSales();
-            let sales = await getTokenItem(salesBlock, categories);
-
-            setCategory(categories);
-            dispatch(WalletActions.SetNetwork(seletecItem));
-            dispatch(
-                WalletActions.setProvider({
-                    provider,
-                    web3Provider,
-                    address,
-                    network: seletecItem,
-                    contractCategory,
-                    contractPresales,
-                    contractOrder,
-                    sales,
-                    categories,
-                })
-            );
-        } catch (e) {
-            console.log("connect error", e);
+        }catch(e){
+            console.log(e)
         }
+        let web3Provider = null;
+
+        if(provider != null){
+            web3Provider = new ethers.providers.Web3Provider(provider);
+            const signer = web3Provider.getSigner();
+            address = await signer.getAddress();
+           
+        }else {
+            seletecItem = networkRefs[0];
+            let url = seletecItem.rpcUrls[0];
+            web3Provider = new ethers.providers.JsonRpcProvider(url);
+        }
+        
+
+        const network = await web3Provider.getNetwork();
+
+        seletecItem = networkRefs.find(
+            (item) => item.chainId == `0x${network.chainId.toString(16)}`
+        );
+    
+
+        
+
+        const contractPresales = new ethers.Contract(
+            contractPresaleFile.address[seletecItem.chainId],
+            IPreSale.abi,
+            web3Provider
+        );
+
+         const contractCategory = new ethers.Contract(
+            contractCategoryFile.address[seletecItem.chainId],
+            ICategoryContract.abi,
+            web3Provider
+        );
+
+        const contractOrder = new ethers.Contract(
+            contractOrderFile.address[seletecItem.chainId],
+            IOrderContract.abi,
+            web3Provider
+        );
+
+        const categoriesBlock = await contractCategory.list();
+
+        const categories = categoriesBlock.map((item) => ({
+            name: item["name"],
+            icon: item["icon"],
+            id: item["id"].toString(),
+            icon: "feather-home",
+            isLive: false,
+        }));
+
+        const salesBlock = await contractPresales.listOpenSales();
+        let sales = await getTokenItem(salesBlock, categories);
+
+        setCategory(categories);
+        dispatch(WalletActions.SetNetwork(seletecItem));
+        dispatch(
+            WalletActions.setProvider({
+                provider,
+                web3Provider,
+                address,
+                network: seletecItem,
+                contractCategory,
+                contractPresales,
+                contractOrder,
+                sales,
+                categories,
+            })
+        );
     });
 
     const getTokenItem = async (itens, categories) => {
