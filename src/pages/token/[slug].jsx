@@ -149,6 +149,7 @@ const TokenDetails = ({ slug }) => {
                 initiated: sale["initiated"],
                 pair: sale["pair"],
                 price: sale["price"].toString(),
+                finalPrice: sale["finalPrice"].toString(),
                 tokenContract: sale["tokenContract"],
                 tokenContractDecimals: parseInt(decimals),
                 tokenContractSymbol: symbol,

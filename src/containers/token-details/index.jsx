@@ -25,7 +25,7 @@ const ProductDetailsArea = ({ space, className, product,history }) => {
         }
         return (
             <>
-                {product.price/10**product.tokenPaymentContractDecimals} {product.tokenPaymentContractSymbol}
+                {product.finalPrice/10**product.tokenPaymentContractDecimals} {product.tokenPaymentContractSymbol}
             </>
         );
     };

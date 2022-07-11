@@ -68,42 +68,34 @@ const Header = ({ className }) => {
         networks,
     } = useSelector((state) => state.wallet);
 
-
-    const defineStorages = async(seletecItem) => {
-
-    }
+    const defineStorages = async (seletecItem) => {};
 
     const authenticate = useCallback(async () => {
         let provider = null;
         let seletecItem = null;
         let address = "";
-        try{
+        try {
             provider = await web3Modal.connect();
-        }catch(e){
-            console.log(e)
+        } catch (e) {
+            console.log(e);
         }
         let web3Provider = null;
 
-        if(provider != null){
+        if (provider != null) {
             web3Provider = new ethers.providers.Web3Provider(provider);
             const signer = web3Provider.getSigner();
             address = await signer.getAddress();
-           
-        }else {
+        } else {
             seletecItem = networkRefs[0];
             let url = seletecItem.rpcUrls[0];
             web3Provider = new ethers.providers.JsonRpcProvider(url);
         }
-        
 
         const network = await web3Provider.getNetwork();
 
         seletecItem = networkRefs.find(
             (item) => item.chainId == `0x${network.chainId.toString(16)}`
         );
-    
-
-        
 
         const contractPresales = new ethers.Contract(
             contractPresaleFile.address[seletecItem.chainId],
@@ -111,7 +103,7 @@ const Header = ({ className }) => {
             web3Provider
         );
 
-         const contractCategory = new ethers.Contract(
+        const contractCategory = new ethers.Contract(
             contractCategoryFile.address[seletecItem.chainId],
             ICategoryContract.abi,
             web3Provider
@@ -155,87 +147,84 @@ const Header = ({ className }) => {
     const getTokenItem = async (itens, categories) => {
         let Promises = [];
         itens.forEach(async (sale) => {
-                Promises.push(
-                    new Promise((resolve, reject) => {
-                        fetch(sale["urlProperties"])
-                            .then((response) => {
-                                return response.json();
-                            })
-                            .then((responseJson) => {
-                                let category = categories.find(
-                                    (item) =>
-                                        item.id == sale["category"].toString()
-                                );
+            Promises.push(
+                new Promise((resolve, reject) => {
+                    fetch(sale["urlProperties"])
+                        .then((response) => {
+                            return response.json();
+                        })
+                        .then((responseJson) => {
+                            let category = categories.find(
+                                (item) => item.id == sale["category"].toString()
+                            );
 
-                                const timestampObjEndTime = moment(
-                                    parseInt(sale["endTime"].toString()) * 1000
-                                );
-                                const timestampObjstartTime = moment(
-                                    parseInt(sale["startTime"].toString()) *
-                                        1000
-                                );
+                            const timestampObjEndTime = moment(
+                                parseInt(sale["endTime"].toString()) * 1000
+                            );
+                            const timestampObjstartTime = moment(
+                                parseInt(sale["startTime"].toString()) * 1000
+                            );
 
-                                const timestampObjstartVesting = moment(
-                                    parseInt(sale["startVesting"].toString()) *
-                                        1000
-                                );
-                                const timestampObjfinishVesting = moment(
-                                    parseInt(sale["finishVesting"].toString()) *
-                                        1000
-                                );
-                                resolve({
-                                    balance: sale["balance"].toString(),
-                                    category: category,
-                                    creator: sale["creator"].toString(),
-                                    startTime: timestampObjstartTime.format(
-                                        "YYYY-MM-DD"
-                                    ),
-                                    endTime: timestampObjEndTime.format(
-                                        "YYYY-MM-DD"
-                                    ),
-                                    startVesting: timestampObjstartVesting.format(
-                                        "YYYY-MM-DD"
-                                    ),
-                                    finishVesting: timestampObjfinishVesting.format(
-                                        "YYYY-MM-DD"
-                                    ),
-                                    balance: sale["balance"].toString(),
-                                    finished: sale["finished"],
-                                    hasVesting: sale["hasVesting"],
-                                    id: sale["id"],
-                                    initiated: sale["initiated"],
-                                    pair: sale["pair"],
-                                    price: sale["price"].toString(),
-                                    tokenContract: sale["tokenContract"],
-                                    tokenPaymentContract:
-                                        sale["tokenPaymentContract"],
-                                    total: sale["total"].toString(),
-                                    totalLocked: sale["totalLocked"].toString(),
-                                    totalPercentForward: sale[
-                                        "totalPercentForward"
-                                    ].toString(),
-                                    totalPercentLiquidPool: sale[
-                                        "totalPercentLiquidPool"
-                                    ].toString(),
-                                    totalSell: sale["totalSell"].toString(),
-                                    urlProperties: sale["urlProperties"],
-                                    name: responseJson.name,
-                                    title: responseJson.title,
-                                    images: responseJson.images,
-                                    description: responseJson.description,
-                                    content_html: responseJson.content_html,
-                                    highlight: sale["highlight"],
-                                    liked: parseInt(sale["liked"].toString()),
-                                    softCap: sale["softCap"].toString(),
-                                    hardCap: sale["hardCap"].toString(),
-                                    minPerUser: sale["minPerUser"].toString(),
-                                    maxPerUser: sale["maxPerUser"].toString(),
-                                    raised: sale["raised"].toString(),
-                                });
+                            const timestampObjstartVesting = moment(
+                                parseInt(sale["startVesting"].toString()) * 1000
+                            );
+                            const timestampObjfinishVesting = moment(
+                                parseInt(sale["finishVesting"].toString()) *
+                                    1000
+                            );
+                            resolve({
+                                balance: sale["balance"].toString(),
+                                category: category,
+                                creator: sale["creator"].toString(),
+                                startTime: timestampObjstartTime.format(
+                                    "YYYY-MM-DD"
+                                ),
+                                endTime: timestampObjEndTime.format(
+                                    "YYYY-MM-DD"
+                                ),
+                                startVesting: timestampObjstartVesting.format(
+                                    "YYYY-MM-DD"
+                                ),
+                                finishVesting: timestampObjfinishVesting.format(
+                                    "YYYY-MM-DD"
+                                ),
+                                balance: sale["balance"].toString(),
+                                finished: sale["finished"],
+                                hasVesting: sale["hasVesting"],
+                                id: sale["id"],
+                                initiated: sale["initiated"],
+                                pair: sale["pair"],
+                                price: sale["price"].toString(),
+                                finalPrice: sale["finalPrice"].toString(),
+                                tokenContract: sale["tokenContract"],
+                                tokenPaymentContract:
+                                    sale["tokenPaymentContract"],
+                                total: sale["total"].toString(),
+                                totalLocked: sale["totalLocked"].toString(),
+                                totalPercentForward: sale[
+                                    "totalPercentForward"
+                                ].toString(),
+                                totalPercentLiquidPool: sale[
+                                    "totalPercentLiquidPool"
+                                ].toString(),
+                                totalSell: sale["totalSell"].toString(),
+                                urlProperties: sale["urlProperties"],
+                                name: responseJson.name,
+                                title: responseJson.title,
+                                images: responseJson.images,
+                                description: responseJson.description,
+                                content_html: responseJson.content_html,
+                                highlight: sale["highlight"],
+                                liked: parseInt(sale["liked"].toString()),
+                                softCap: sale["softCap"].toString(),
+                                hardCap: sale["hardCap"].toString(),
+                                minPerUser: sale["minPerUser"].toString(),
+                                maxPerUser: sale["maxPerUser"].toString(),
+                                raised: sale["raised"].toString(),
                             });
-                    })
-                );
-
+                        });
+                })
+            );
         });
         return Promise.all(Promises);
     };

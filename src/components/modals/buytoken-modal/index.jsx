@@ -220,15 +220,19 @@ const PlaceBidModal = ({ show, handleModal, product }) => {
                                 </div>
                                 <div className="bid-content-right">
                                     <span>
-                                        {product.minPerUser}{" "}
+                                        {product.minPerUser /
+                                            10 **
+                                                product.tokenPaymentContractDecimals}{" "}
                                         {product.tokenPaymentContractSymbol}
                                     </span>
                                     <span>
-                                        {product.maxPerUser}{" "}
+                                        {product.maxPerUser /
+                                            10 **
+                                                product.tokenPaymentContractDecimals}{" "}
                                         {product.tokenPaymentContractSymbol}
                                     </span>
                                     <span>
-                                        {product.price /
+                                        {product.finalPrice /
                                             10 **
                                                 product.tokenPaymentContractDecimals}{" "}
                                         {product.tokenPaymentContractSymbol}

@@ -40,7 +40,7 @@ const PlaceBet = ({ product }) => {
                                     </span>
                                     <span className="count-number">
                                         por: {parseFloat(
-                                            product.price /
+                                            product.finalPrice /
                                                 10 **
                                                     product.tokenPaymentContractDecimals
                                         )} {product.tokenPaymentContractSymbol}

@@ -152,7 +152,7 @@ const Product = ({ overlay, placeBid, disableShareDropdown, product }) => {
                 <span className="latest-bid">
                     Soft Cap: <br />{" "}
                     <strong>
-                        {numeral(productRef.softCap).format("0,0")}{" "}
+                        {numeral(productRef.softCap/10**productRef.tokenPaymentContractDecimals).format("0,0")}{" "}
                         {productRef.tokenPaymentContractSymbol}
                     </strong>
                 </span>
@@ -160,7 +160,7 @@ const Product = ({ overlay, placeBid, disableShareDropdown, product }) => {
                 <span className="latest-bid">
                     hard Cap: <br />
                     <strong>
-                        {numeral(productRef.hardCap).format("0,0")}{" "}
+                        {numeral(productRef.hardCap/10**productRef.tokenPaymentContractDecimals).format("0,0")}{" "}
                         {productRef.tokenPaymentContractSymbol}
                     </strong>
                 </span>
@@ -186,7 +186,7 @@ const Product = ({ overlay, placeBid, disableShareDropdown, product }) => {
                 <ProductBid
                     price={{
                         amount: parseFloat(
-                            productRef.price /
+                            productRef.finalPrice /
                                 10 ** productRef.tokenPaymentContractDecimals
                         ),
                         currency: productRef.tokenPaymentContractSymbol,
