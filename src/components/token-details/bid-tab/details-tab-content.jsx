@@ -16,15 +16,21 @@ const DetailsTabContent = ({ owner, properties, tags, product }) => (
                     <div key={1} className="pd-property-inner">
                         <span className="color-body type">Soft Cap:</span>
                         <span className="color-white value">
-                            {numeral(product.softCap).format("0,0")} <br></br>{" "}
-                            {product.tokenPaymentContractSymbol}
+                            {numeral(
+                                product.softCap /
+                                    10 ** product.tokenPaymentContractDecimals
+                            ).format("0,0")}{" "}
+                            <br></br> {product.tokenPaymentContractSymbol}
                         </span>
                     </div>
                     <div key={2} className="pd-property-inner">
                         <span className="color-body type">hard Cap:</span>
                         <span className="color-white value">
-                            {numeral(product.hardCap).format("0,0")} <br></br>{" "}
-                            {product.tokenPaymentContractSymbol}
+                            {numeral(
+                                product.hardCap /
+                                    10 ** product.tokenPaymentContractDecimals
+                            ).format("0,0")}{" "}
+                            <br></br> {product.tokenPaymentContractSymbol}
                         </span>
                     </div>
                     <div key={3} className="pd-property-inner">
@@ -36,7 +42,10 @@ const DetailsTabContent = ({ owner, properties, tags, product }) => (
                     <div key={4} className="pd-property-inner">
                         <span className="color-body type">Total Raised:</span>
                         <span className="color-white value">
-                            {numeral(product.totalSell ).format("0,0")}
+                            {numeral(
+                                product.raised /
+                                    10 ** product.tokenPaymentContractDecimals
+                            ).format("0,0")}
                             <br></br> {product.tokenPaymentContractSymbol}
                         </span>
                     </div>

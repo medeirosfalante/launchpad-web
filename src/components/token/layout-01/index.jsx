@@ -91,8 +91,8 @@ const Product = ({ overlay, placeBid, disableShareDropdown, product }) => {
                 tokenContractSymbol: symbol,
                 tokenPaymentContractDecimals: parseInt(decimalsPayment),
                 tokenPaymentContractSymbol: symbolPayment,
-                balance: product.balance / 10**parseInt(decimals),
-                totalSell: product.totalSell / 10**parseInt(decimals)
+                balance: product.balance / 10 ** parseInt(decimals),
+                totalSell: product.totalSell / 10 ** parseInt(decimals),
             });
         }
     }, []);
@@ -152,7 +152,10 @@ const Product = ({ overlay, placeBid, disableShareDropdown, product }) => {
                 <span className="latest-bid">
                     Soft Cap: <br />{" "}
                     <strong>
-                        {numeral(productRef.softCap/10**productRef.tokenPaymentContractDecimals).format("0,0")}{" "}
+                        {numeral(
+                            productRef.softCap /
+                                10 ** productRef.tokenPaymentContractDecimals
+                        ).format("0,0")}{" "}
                         {productRef.tokenPaymentContractSymbol}
                     </strong>
                 </span>
@@ -160,7 +163,10 @@ const Product = ({ overlay, placeBid, disableShareDropdown, product }) => {
                 <span className="latest-bid">
                     hard Cap: <br />
                     <strong>
-                        {numeral(productRef.hardCap/10**productRef.tokenPaymentContractDecimals).format("0,0")}{" "}
+                        {numeral(
+                            productRef.hardCap /
+                                10 ** productRef.tokenPaymentContractDecimals
+                        ).format("0,0")}{" "}
                         {productRef.tokenPaymentContractSymbol}
                     </strong>
                 </span>
@@ -168,9 +174,12 @@ const Product = ({ overlay, placeBid, disableShareDropdown, product }) => {
                 <span className="latest-bid">
                     Total Raised: <br />
                     <strong>
-                        {numeral(productRef.totalSell).format("0,0")}
+                        {numeral(
+                            productRef.raised /
+                                10 ** productRef.tokenPaymentContractDecimals
+                        ).format("0,0")}
                     </strong>
-                    <br></br> {productRef.tokenContractSymbol}
+                    <br></br> {productRef.tokenPaymentContractSymbol}
                 </span>
                 <br />
                 <span className="latest-bid">
