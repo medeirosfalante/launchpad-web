@@ -47,7 +47,7 @@ const Home = () => {
                 <TokenHeroArea
                     data={{
                         section: "hero-section",
-                        badge: sales.length > 0 ? sales[0].title:"",
+                        badge: sales.length > 0 ? sales[0].category.name:"",
                         title:
                         sales.length > 0 ? sales[0].title:"" ,
                         description:
