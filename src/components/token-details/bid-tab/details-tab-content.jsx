@@ -62,14 +62,20 @@ const DetailsTabContent = ({ owner, properties, tags, product }) => (
                     <div key={5} className="pd-property-inner">
                         <span className="color-body type">Min per user:</span>
                         <span className="color-white value">
-                            {numeral(product.minPerUser).format("0,0")}{" "}
+                            {numeral(
+                                product.minPerUser /
+                                    10 ** product.tokenPaymentContractDecimals
+                            ).format("0,0")}{" "}
                             <br></br> {product.tokenPaymentContractSymbol}
                         </span>
                     </div>
                     <div key={5} className="pd-property-inner">
                         <span className="color-body type">Max per user:</span>
                         <span className="color-white value">
-                            {numeral(product.maxPerUser).format("0,0")}{" "}
+                            {numeral(
+                                product.maxPerUser /
+                                    10 ** product.tokenPaymentContractDecimals
+                            ).format("0,0")}{" "}
                             <br></br> {product.tokenPaymentContractSymbol}
                         </span>
                     </div>

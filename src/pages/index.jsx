@@ -47,18 +47,18 @@ const Home = () => {
                 <TokenHeroArea
                     data={{
                         section: "hero-section",
-                        badge: "EnablersDAO Launchpad",
+                        badge: sales.length > 0 ? sales[0].title:"",
                         title:
-                            "Enablers is a leading DAO-governed incubator augmented",
+                        sales.length > 0 ? sales[0].title:"" ,
                         description:
-                            "Where Bitcoin was hailed as the digital answer to currency, NFTs <br/> are now being touted as the digital answer to collectables.",
-                        buttons: [
+                        sales.length > 0 ? sales[0].description:"" ,
+                        buttons: sales.length > 0 ? [
                             {
                                 id: 1,
-                                path: "/user",
-                                content: "My tokens",
+                                path: `/token/${sales[0].id}`,
+                                content: "Buy now",
                             },
-                        ],
+                        ]:[],
                         banners: sales.map((item) => ({
                             id: 1,
                             title: item.title,
