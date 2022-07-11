@@ -57,7 +57,7 @@ const Home = () => {
                                 id: 1,
                                 path: "/user",
                                 content: "My tokens",
-                            }
+                            },
                         ],
                         banners: sales.map((item) => ({
                             id: 1,

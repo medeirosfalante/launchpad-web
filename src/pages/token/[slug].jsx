@@ -12,7 +12,7 @@ import dynamic from "next/dynamic";
 import React, { useCallback, useEffect, useState } from "react";
 import { ethers, Contract, getDefaultProvider, utils } from "ethers";
 import erc20 from "../../data/interfaces/erc20.json";
-
+import numeral from "numeral";
 import moment from "moment";
 
 const withNoSSR = (Component) =>
@@ -119,9 +119,11 @@ const TokenDetails = ({ slug }) => {
                 price:
                     parseInt(item["price"].toString()) /
                     10 ** parseInt(decimalsPayment),
-                amountInToken: parseInt(item["amountInToken"].toString()),
-                buyer:   item["buyer"],
-                path: `${network.blockExplorerUrls[0]}/address/${item["buyer"]}`   ,
+                amountInToken: numeral(item["amountInToken"].toString()).format(
+                    "0,0"
+                ),
+                buyer: item["buyer"],
+                path: `${network.blockExplorerUrls[0]}/address/${item["buyer"]}`,
                 buyAt:
                     "     " +
                     moment(parseInt(item["buyAt"].toString()) * 1000).format(
@@ -131,7 +133,6 @@ const TokenDetails = ({ slug }) => {
                 tokenContractSymbol: symbol,
                 tokenPaymentContractSymbol: symbolPayment,
             }));
-
             setHistory(history);
 
             setSales({
@@ -161,6 +162,7 @@ const TokenDetails = ({ slug }) => {
                     "totalPercentLiquidPool"
                 ].toString(),
                 totalSell: sale["totalSell"].toString(),
+                raised: sale["raised"].toString(),
                 urlProperties: sale["urlProperties"],
                 name: responseJson.name,
                 title: responseJson.title,

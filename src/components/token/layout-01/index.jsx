@@ -13,13 +13,9 @@ import PlaceBidModal from "@components/modals/placebid-modal";
 import { useSelector } from "react-redux";
 import { ethers, Contract, getDefaultProvider, utils } from "ethers";
 import erc20 from "../../../data/interfaces/erc20.json";
+import numeral from "numeral";
 
-const Product = ({
-    overlay,
-    placeBid,
-    disableShareDropdown,
-    product,
-}) => {
+const Product = ({ overlay, placeBid, disableShareDropdown, product }) => {
     const [showBidModal, setShowBidModal] = useState(false);
 
     const [productRef, setProductRef] = useState({
@@ -95,6 +91,8 @@ const Product = ({
                 tokenContractSymbol: symbol,
                 tokenPaymentContractDecimals: parseInt(decimalsPayment),
                 tokenPaymentContractSymbol: symbolPayment,
+                balance: product.balance / 10**parseInt(decimals),
+                totalSell: product.totalSell / 10**parseInt(decimals)
             });
         }
     }, []);
@@ -152,30 +150,47 @@ const Product = ({
                 </span>
                 <br />
                 <span className="latest-bid">
-                    Soft Cap: <br /> <strong>{productRef.softCap} USDT</strong>
+                    Soft Cap: <br />{" "}
+                    <strong>
+                        {numeral(productRef.softCap).format("0,0")}{" "}
+                        {productRef.tokenPaymentContractSymbol}
+                    </strong>
                 </span>
                 <br />
                 <span className="latest-bid">
                     hard Cap: <br />
-                    <strong>{productRef.hardCap} { productRef.tokenPaymentContractSymbol}</strong>
+                    <strong>
+                        {numeral(productRef.hardCap).format("0,0")}{" "}
+                        {productRef.tokenPaymentContractSymbol}
+                    </strong>
                 </span>
                 <br />
                 <span className="latest-bid">
                     Total Raised: <br />
-                    <strong>{productRef.totalSell}</strong><br></br> {productRef.tokenContractSymbol}
+                    <strong>
+                        {numeral(productRef.totalSell).format("0,0")}
+                    </strong>
+                    <br></br> {productRef.tokenContractSymbol}
                 </span>
                 <br />
                 <span className="latest-bid">
-                    Availability: <br /> <strong>{productRef.balance}<br></br> {productRef.tokenContractSymbol}</strong>
+                    Availability: <br />{" "}
+                    <strong>
+                        {" "}
+                        {numeral(productRef.balance).format("0,0")}
+                        <br></br> {productRef.tokenContractSymbol}
+                    </strong>
                 </span>
                 <br />
                 <br />
                 <ProductBid
-                    price={{ amount:  parseFloat(
-                        productRef.price /
-                            10 **
-                                productRef.tokenPaymentContractDecimals
-                    ), currency: productRef.tokenPaymentContractSymbol }}
+                    price={{
+                        amount: parseFloat(
+                            productRef.price /
+                                10 ** productRef.tokenPaymentContractDecimals
+                        ),
+                        currency: productRef.tokenPaymentContractSymbol,
+                    }}
                     likeCount={productRef.liked}
                 />
             </div>

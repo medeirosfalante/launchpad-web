@@ -24,7 +24,7 @@ const ExploreProductArea = ({ className, space, data }) => {
     const [state, dispatch] = useReducer(reducer, {
         filterToggle: false,
         products: data.products || [],
-        inputs: { price: [0, 100] },
+        inputs: { price: [0.000001, 10] },
     });
 
     const slectHandler = ({ value }, name) => {

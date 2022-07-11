@@ -15,6 +15,8 @@ import { utils } from "ethers";
 import tokens from "../../data/tokens.json";
 import productsRef from "../../data/products-02.json"
 
+
+
 // Demo Image
 
 const ProductDetailsArea = ({ space, className, product }) => {

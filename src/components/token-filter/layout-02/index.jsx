@@ -33,28 +33,14 @@ const ProductFilter = ({ slectHandler, sortHandler, priceHandler, inputs }) => {
                         name="category"
                     />
                 </div>
-                <div className="filter-select-option">
-                    <h6 className="filter-leble">Collections</h6>
-                    <NiceSelect
-                        options={[]}
-                        placeholder="Collections"
-                        onChange={slectHandler}
-                        name="collection"
-                    />
-                </div>
+
 
                 <div className="filter-select-option">
                     <h6 className="filter-leble">Sale type</h6>
                     <NiceSelect
                         options={[
                             { value: "all", text: "All Type" },
-                            { value: "fixed-price", text: "Fixed price" },
-                            { value: "timed-auction", text: "Timed auction" },
-                            { value: "not-for-sale", text: "Not for sale" },
-                            {
-                                value: "open-for-offers",
-                                text: "Open for offers",
-                            },
+                            { value: "IDO", text: "IDO" },
                         ]}
                         placeholder="Sale type"
                         onChange={slectHandler}
@@ -62,7 +48,7 @@ const ProductFilter = ({ slectHandler, sortHandler, priceHandler, inputs }) => {
                     />
                 </div>
                 <div className="filter-select-option">
-                    <h6 className="filter-leble">Price Range</h6>
+                    {/* <h6 className="filter-leble">Price Range</h6>
                     <div className="price_filter s-filter clear">
                         <form action="#" method="GET">
                             <InputRange
@@ -70,8 +56,11 @@ const ProductFilter = ({ slectHandler, sortHandler, priceHandler, inputs }) => {
                                 onChange={priceHandler}
                             />
                         </form>
-                    </div>
+                    </div> */}
                 </div>
+                <div className="filter-select-option">
+                    
+                    </div>
             </div>
         </div>
     );

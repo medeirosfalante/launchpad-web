@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import TopSeller from "@components/top-seller/layout-01";
 import { IDType, ImageType } from "@utils/types";
+import numeral from "numeral";
 
 const DetailsTabContent = ({ owner, properties, tags, product }) => (
     <div className="mt--20">
@@ -10,50 +11,57 @@ const DetailsTabContent = ({ owner, properties, tags, product }) => (
                 <div className="property-wrapper">
                     <div key={0} className="pd-property-inner">
                         <span className="color-body type">Launch Type:</span>
-                        <span className="color-white value">
-                          IDO
-                        </span>
+                        <span className="color-white value">IDO</span>
                     </div>
                     <div key={1} className="pd-property-inner">
                         <span className="color-body type">Soft Cap:</span>
                         <span className="color-white value">
-                          {product.softCap} <br></br> {product.tokenPaymentContractSymbol}
+                            {numeral(product.softCap).format("0,0")} <br></br>{" "}
+                            {product.tokenPaymentContractSymbol}
                         </span>
                     </div>
                     <div key={2} className="pd-property-inner">
                         <span className="color-body type">hard Cap:</span>
                         <span className="color-white value">
-                          {product.hardCap}<br></br> {product.tokenPaymentContractSymbol}
+                            {numeral(product.hardCap).format("0,0")} <br></br>{" "}
+                            {product.tokenPaymentContractSymbol}
                         </span>
                     </div>
                     <div key={3} className="pd-property-inner">
                         <span className="color-body type">Liquidity:</span>
                         <span className="color-white value">
-                          {product.totalPercentLiquidPool}%
+                            {product.totalPercentLiquidPool}%
                         </span>
                     </div>
                     <div key={4} className="pd-property-inner">
                         <span className="color-body type">Total Raised:</span>
                         <span className="color-white value">
-                          {product.totalSell}<br></br>  {product.tokenPaymentContractSymbol}
+                            {numeral(product.totalSell ).format("0,0")}
+                            <br></br> {product.tokenPaymentContractSymbol}
                         </span>
                     </div>
                     <div key={5} className="pd-property-inner">
                         <span className="color-body type">Availability:</span>
                         <span className="color-white value">
-                          {product.balance}<br></br> {product.tokenContractSymbol}
+                            {numeral(
+                                product.balance /
+                                    10 ** product.tokenContractDecimals
+                            ).format("0,0")}{" "}
+                            <br></br> {product.tokenContractSymbol}
                         </span>
                     </div>
                     <div key={5} className="pd-property-inner">
                         <span className="color-body type">Min per user:</span>
                         <span className="color-white value">
-                          {product.minPerUser} <br></br> {product.tokenPaymentContractSymbol}
+                            {numeral(product.minPerUser).format("0,0")}{" "}
+                            <br></br> {product.tokenPaymentContractSymbol}
                         </span>
                     </div>
                     <div key={5} className="pd-property-inner">
                         <span className="color-body type">Max per user:</span>
                         <span className="color-white value">
-                          {product.maxPerUser} <br></br> {product.tokenPaymentContractSymbol}
+                            {numeral(product.maxPerUser).format("0,0")}{" "}
+                            <br></br> {product.tokenPaymentContractSymbol}
                         </span>
                     </div>
                 </div>

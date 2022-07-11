@@ -231,6 +231,7 @@ const Header = ({ className }) => {
                                     hardCap: sale["hardCap"].toString(),
                                     minPerUser: sale["minPerUser"].toString(),
                                     maxPerUser: sale["maxPerUser"].toString(),
+                                    raised: sale["raised"].toString(),
                                 });
                             });
                     })

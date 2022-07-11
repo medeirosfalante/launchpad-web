@@ -8,13 +8,21 @@ import BidsTabContent from "./bids-tab-content";
 import DetailsTabContent from "./details-tab-content";
 import HistoryTabContent from "./history-tab-content";
 
-const BidTab = ({ className, bids, owner, properties, tags, history,product }) => (
+const BidTab = ({
+    className,
+    bids,
+    owner,
+    properties,
+    tags,
+    history,
+    product,
+}) => (
     <TabContainer defaultActiveKey="nav-tokenomics">
         <div className={clsx("tab-wrapper-one", className)}>
             <nav className="tab-button-one">
                 <Nav as="div" className="nav-tabs">
                     <Nav.Link as="button" eventKey="nav-tokenomics">
-                    Tokenomics
+                        Tokenomics
                     </Nav.Link>
                     <Nav.Link as="button" eventKey="nav-history">
                         History
