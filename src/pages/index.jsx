@@ -9,6 +9,7 @@ import TopSellerArea from "@containers/top-seller/layout-01";
 import ServiceArea from "@containers/services/layout-01";
 import CollectionArea from "@containers/collection/layout-01";
 import { normalizedData } from "@utils/methods";
+import Lottie from "react-lottie";
 
 import { useSelector } from "react-redux";
 
@@ -19,12 +20,23 @@ import productData from "../data/products.json";
 import collectionsData from "../data/collections.json";
 import IMarketplace from "../data/IMarketplace.json";
 
+import animationData from "../data/loading/99274-loading.json";
+
+const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice",
+    },
+};
+
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
 const Home = () => {
-    const { sales } = useSelector((state) => state.wallet);
+    const { sales, loading } = useSelector((state) => state.wallet);
 
     const content = normalizedData(homepageData?.content || []);
     const liveAuctionData = productData
@@ -44,48 +56,57 @@ const Home = () => {
             <SEO pageTitle="Home Four" />
             <Header />
             <main id="main-content">
-                <TokenHeroArea
-                    data={{
-                        section: "hero-section",
-                        badge: sales.length > 0 ? sales[0].category.name:"",
-                        title:
-                        sales.length > 0 ? sales[0].title:"" ,
-                        description:
-                        sales.length > 0 ? sales[0].description:"" ,
-                        buttons: sales.length > 0 ? [
-                            {
-                                id: 1,
-                                path: `/token/${sales[0].id}`,
-                                content: "Buy now",
-                            },
-                        ]:[],
-                        banners: sales.map((item) => ({
-                            id: 1,
-                            title: item.title,
-                            client: "Bordcast",
-                            path: `/token/${item.id}`,
-                            image: {
-                                src: item.images[0],
-                            },
-                        })),
-                    }}
-                />
-                {/* <LiveExploreArea
-                    data={{
-                        ...content["live-explore-section"],
-                        products: orders,
-                    }}
-                /> */}
-                <ExploreProductArea
-                    data={{
-                        ...{
-                            section_title: {
-                                title: "Explore IDO",
-                            },
-                        },
-                        products: sales,
-                    }}
-                />
+                {loading ? (
+                    <Lottie options={defaultOptions} height={400} width={400} />
+                ) : (
+                    <>
+                        <TokenHeroArea
+                            data={{
+                                section: "hero-section",
+                                badge:
+                                    sales.length > 0
+                                        ? sales[0].category.name
+                                        : "",
+                                title: sales.length > 0 ? sales[0].title : "",
+                                description:
+                                    sales.length > 0
+                                        ? sales[0].description
+                                        : "",
+                                buttons:
+                                    sales.length > 0
+                                        ? [
+                                              {
+                                                  id: 1,
+                                                  path: `/token/${sales[0].id}`,
+                                                  content: "Buy now",
+                                              },
+                                          ]
+                                        : [],
+                                banners: sales.map((item) => ({
+                                    id: 1,
+                                    title: item.title,
+                                    client: "Bordcast",
+                                    path: `/token/${item.id}`,
+                                    image: {
+                                        src: item.images[0],
+                                    },
+                                })),
+                            }}
+                        />
+
+                        <ExploreProductArea
+                            data={{
+                                ...{
+                                    section_title: {
+                                        title: "Explore IDO",
+                                    },
+                                },
+                                products: sales,
+                            }}
+                        />
+                    </>
+                )}
+
                 {/* <TopSellerArea
                     data={{
                         ...content["top-sller-section"],

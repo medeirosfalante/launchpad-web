@@ -18,8 +18,8 @@ const MainMenu = ({ menu, categories }) => {
                     <Anchor className="its_new" path={nav.path}>
                         {nav.text}
                     </Anchor>
-                    {/* {nav?.submenu && <SubMenu categories={categories} />} */}
-                    {/* {nav?.megamenu && <MegaMenu menu={nav.megamenu} />} */}
+                    {nav?.submenu && <SubMenu categories={categories} />}
+                    {nav?.megamenu && <MegaMenu menu={nav.megamenu} />}
                 </li>
             ))}
         </ul>

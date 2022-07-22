@@ -650,3 +650,12 @@ input[type="search"]::-webkit-search-results-decoration {
     width: 100%;
     backdrop-filter: blur(9px);
 }
+
+
+.loading-details{
+    width: 100%;
+    position: absolute;
+    z-index: 999;
+    height: 300vh;
+    background: rgb(0 0 0 / 80%);
+}

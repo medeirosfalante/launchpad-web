@@ -14,6 +14,18 @@ import { ethers, Contract, getDefaultProvider, utils } from "ethers";
 import erc20 from "../../data/interfaces/erc20.json";
 import numeral from "numeral";
 import moment from "moment";
+import Lottie from "react-lottie";
+
+import animationData from "../../data/loading/99274-loading.json";
+
+const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice",
+    },
+};
 
 const withNoSSR = (Component) =>
     dynamic(() => Promise.resolve(Component), { ssr: false });
@@ -29,6 +41,7 @@ const TokenDetails = ({ slug }) => {
         categories,
         network,
     } = useSelector((state) => state.wallet);
+    const [loading, setLoading] = useState(true);
     const [sale, setSales] = useState({
         balance: "",
         category: {
@@ -71,6 +84,7 @@ const TokenDetails = ({ slug }) => {
     const [history, setHistory] = useState([]);
 
     useEffect(async () => {
+        setLoading(true);
         if (contractPresales != null && slug != undefined) {
             const sale = await contractPresales.getSale(slug);
             let category = categories.find(
@@ -177,6 +191,7 @@ const TokenDetails = ({ slug }) => {
                 minPerUser: sale["minPerUser"].toString(),
                 maxPerUser: sale["maxPerUser"].toString(),
             });
+            setLoading(false);
         }
     }, [contractPresales, contractOrder, slug]);
 
@@ -186,6 +201,18 @@ const TokenDetails = ({ slug }) => {
             <Header />
             <main id="main-content">
                 <Breadcrumb pageTitle={sale.title} currentPage={sale.title} />
+
+                {loading && (
+                    <div className="loading-details">
+                        {" "}
+                        <Lottie
+                            options={defaultOptions}
+                            height={400}
+                            width={400}
+                        />{" "}
+                    </div>
+                )}
+
                 <TokenDetailsArea product={sale} history={history} />
             </main>
             <Footer />

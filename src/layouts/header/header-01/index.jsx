@@ -126,8 +126,9 @@ const Header = ({ className }) => {
         }));
 
         const salesBlock = await contractPresales.listOpenSales();
-        let sales = await getTokenItem(salesBlock, categories);
         setCategory(categories);
+        let sales = await getTokenItem(salesBlock, categories);
+   
         dispatch(WalletActions.SetNetwork(seletecItem));
         dispatch(
             WalletActions.setProvider({
